@@ -7,6 +7,7 @@ package javabrick;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import java.awt.event.KeyListener;
@@ -33,7 +34,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener{
     private int ballposX = 120;
     private int ballposY = 350;
     private int ballXdir = -1;
-    private int ballYdir = -2;
+    private int ballYdir = -3;
     
     public GamePlay(){
         addKeyListener(this);
@@ -102,6 +103,23 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         timer.start();
+        if(play){
+            if(new Rectangle(ballposX,ballposY,20,20).intersects(new Rectangle(playerX,550,100,8))){
+                ballYdir = -ballYdir;
+            }
+            ballposX += ballXdir;
+            ballposY += ballYdir;
+            if(ballposX < 0){
+                ballXdir = -ballXdir;
+            }
+            if(ballposY < 0){
+                ballYdir = -ballYdir;
+            }
+            if(ballposX > 670){
+                ballXdir = -ballXdir;
+
+            }
+        }
         repaint();
     }
     
