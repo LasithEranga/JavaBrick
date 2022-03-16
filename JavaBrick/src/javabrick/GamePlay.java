@@ -7,6 +7,7 @@ package javabrick;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
@@ -36,7 +37,10 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener{
     private int ballXdir = -1;
     private int ballYdir = -3;
     
+    private MapGenerator map;
+    
     public GamePlay(){
+        map = new MapGenerator(3, 7);
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
@@ -53,6 +57,9 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener{
         g.fillRect(0, 0, 692, 3);
         g.fillRect(0, 0, 3, 592);
 
+        //drawing map 
+        map.draw((Graphics2D)g);
+        
         //the paddle
         g.setColor(Color.green);
         g.fillRect(playerX, 550, 100, 8);
